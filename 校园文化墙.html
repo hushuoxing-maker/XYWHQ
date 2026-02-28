@@ -1,186 +1,196 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>古月AI智能体 · 校园文化墙灵感库</title>
-    <style>
-        :root {
-            --primary-color: #3b82f6;
-            --primary-hover: #1d4ed8;
-            --bg-color: #f2f8fb;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古月AI智能体 · 校园文化墙灵感库</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 900px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: #fff;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: clamp(18px, 5vw, 24px);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .main { padding: clamp(20px, 5vw, 40px); }
-
-        .prompt-wrapper { position: relative; }
-
-        .prompt-text {
-            width: 100%;
-            height: 60vh;
-            min-height: 400px;
-            padding: 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 14px;
-            line-height: 1.8;
-            color: #334155;
-            resize: none;
-            background: #f8fafc;
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .prompt-text:focus { border-color: var(--primary-color); }
-
-        .actions {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .copy-btn {
-            width: 100%;
-            max-width: 300px;
-            padding: 14px 28px;
-            background: var(--primary-color);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
-        }
-
-        .copy-btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
-        }
-
-        .copy-btn:active { transform: translateY(0); }
-
-        .tip {
-            font-size: 13px;
-            color: var(--text-muted);
-            text-align: center;
-        }
-
-        /* 吐司提示样式 */
-        #toast {
-            visibility: hidden;
-            min-width: 200px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 12px;
-            position: fixed;
-            z-index: 100;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-        }
-    </style>
+<style>
+:root{
+--primary-color:#3b82f6;
+--primary-hover:#1d4ed8;
+--bg-color:#f2f8fb;
+--text-main:#1e293b;
+--text-muted:#64748b;
+--card-shadow:0 10px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+background:var(--bg-color);
+color:var(--text-main);
+line-height:1.6;
+padding:20px;
+display:flex;
+justify-content:center;
+}
+.container{
+width:100%;
+max-width:900px;
+background:#fff;
+border-radius:16px;
+box-shadow:var(--card-shadow);
+overflow:hidden;
+}
+.header{
+background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
+color:#fff;
+padding:30px 20px;
+text-align:center;
+}
+.header h1{
+font-size:clamp(18px,5vw,24px);
+font-weight:600;
+}
+.main{padding:clamp(20px,5vw,40px);}
+.prompt-text{
+width:100%;
+height:60vh;
+min-height:420px;
+padding:20px;
+border:2px solid #e2e8f0;
+border-radius:12px;
+font-size:14px;
+line-height:1.8;
+color:#334155;
+resize:none;
+background:#f8fafc;
+outline:none;
+}
+.prompt-text:focus{border-color:var(--primary-color);}
+.actions{
+margin-top:20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:12px;
+}
+.copy-btn{
+width:100%;
+max-width:300px;
+padding:14px 28px;
+background:var(--primary-color);
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:500;
+cursor:pointer;
+transition:.2s;
+box-shadow:0 4px 6px -1px rgba(59,130,246,.3);
+}
+.copy-btn:hover{
+background:var(--primary-hover);
+transform:translateY(-1px);
+box-shadow:0 10px 15px -3px rgba(59,130,246,.4);
+}
+.tip{
+font-size:13px;
+color:var(--text-muted);
+text-align:center;
+}
+#toast{
+visibility:hidden;
+min-width:200px;
+background:#333;
+color:#fff;
+text-align:center;
+border-radius:8px;
+padding:12px;
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+font-size:14px;
+opacity:0;
+transition:.3s;
+}
+#toast.show{
+visibility:visible;
+opacity:1;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1>古月AI · 校园文化墙灵感库</h1>
-    </div>
-    <div class="main">
-        <div class="prompt-wrapper">
-            <textarea class="prompt-text" id="promptContent" readonly>
-你是一名资深且高级的古月AI智能体·校园文化墙灵感库设计专家...（此处保留原提示词内容）...确保每一组话题词最后一句均为“文化墙正面完全展示。”。</textarea>
-        </div>
-        
-        <div class="actions">
-            <button class="copy-btn" onclick="copyPrompt()" aria-label="一键复制提示词">
-                一键复制整套设定词
-            </button>
-            <div class="tip">
-                💡 复制后粘贴至 DeepSeek，输入<strong>学校类型 / 主题 / 内文</strong>即可
-            </div>
-        </div>
-    </div>
+<div class="header">
+<h1>古月AI智能体 · 校园文化墙灵感库</h1>
 </div>
 
-<div id="toast">复制成功！快去 DeepSeek 体验吧</div>
+<div class="main">
+<textarea class="prompt-text" id="promptContent" readonly>
+
+你是一名资深且高级的校园文化墙设计智能体，专注于打造展示学校校训校风、办学理念、师生作品、科学知识普及、名人名言、班级公约、活动剪影、荣誉榜及通知公告等板块信息的校园文化墙，长期服务于小学、初中、高中、大学及各类教育培训机构与文创教育空间。
+
+你具备成熟的空间设计能力与高级视觉版式审美，在设计过程中会系统性考虑文化墙整体尺寸比例、墙面规划、视觉节奏、文字字号层级、主标题与副标题比例、行距字距控制、板块排列秩序以及整体留白与视觉呼吸感，确保画面结构稳定、比例协调、信息清晰易读。
+
+设计风格以校园文化风为核心，强调教育感、亲和力、活泼但不杂乱、易读性强，色彩搭配温和协调，融合学校特色元素与学生创意表达，整体风格统一且具有秩序感。
+
+在所有设计中必须遵循以下原则：
+文化墙需呈现在真实合理的校园空间中，如教学楼走廊、图书馆、前厅或公共学习区；空间尺度与墙面比例协调；构图自然真实；材质符合可落地施工标准，如木饰面、亚克力板、环保板材、艺术涂料、照片板、轻质金属字等。
+
+当我提供学校类型、文化墙主题及内文内容后，你需一次性输出10组完整独立、可直接用于即梦AI生成效果图的中文话题词，不进行解释说明，不拆分要点，不使用关键词堆砌方式。
+
+每一组必须为完整连续描述，并在结尾强制追加固定句式：
+“文化墙正面完全展示。”
+
+画面要求：
+墙体必须方正、规则、完整平面；
+不要圆弧墙面；
+不要异形结构；
+不要弧度设计；
+墙体完整出现在画面中。
+
+视角要求：
+使用正面视图 / 正视角 / front view；
+镜头与墙面垂直；
+不要倾斜、不要透视、不要仰视或俯视；
+构图端正。
+
+文字要求：
+全部为清晰可识别中文简体；
+禁止乱码；
+禁止假文字；
+逻辑正确可阅读。
+
+排版要求：
+标题 > 副标题 > 正文；
+层级清晰；
+留白合理；
+结构清晰；
+避免拥挤。
+
+风格必须真实可施工落地，不得使用概念图表达。
+
+</textarea>
+
+<div class="actions">
+<button class="copy-btn" onclick="copyPrompt()">一键复制整套设定词</button>
+<div class="tip">💡 复制后粘贴至 DeepSeek，输入 学校类型 / 主题 / 内文 即可生成10组效果图提示词</div>
+</div>
+
+</div>
+</div>
+
+<div id="toast">复制成功！快去 DeepSeek 使用吧</div>
 
 <script>
-    async function copyPrompt() {
-        const text = document.getElementById("promptContent").value;
-        const toast = document.getElementById("toast");
-
-        try {
-            // 使用现代 API 复制
-            await navigator.clipboard.writeText(text);
-            
-            // 显示成功的 Toast
-            toast.classList.add("show");
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 2500);
-            
-        } catch (err) {
-            // 降级处理：手动选中并复制
-            const textArea = document.getElementById("promptContent");
-            textArea.select();
-            document.execCommand("copy");
-            alert("已通过兼容模式复制");
-        }
-    }
+async function copyPrompt(){
+const text=document.getElementById("promptContent").value;
+const toast=document.getElementById("toast");
+try{
+await navigator.clipboard.writeText(text);
+toast.classList.add("show");
+setTimeout(()=>{toast.classList.remove("show");},2500);
+}catch(err){
+const textArea=document.getElementById("promptContent");
+textArea.select();
+document.execCommand("copy");
+alert("已通过兼容模式复制");
+}
+}
 </script>
 
 </body>
