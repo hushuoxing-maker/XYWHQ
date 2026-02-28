@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古月AI智能体 · 校园文化墙灵感库</title>
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f2f8fb;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .main { padding: clamp(20px, 5vw, 40px); }
+
+        .prompt-wrapper { position: relative; }
+
+        .prompt-text {
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #334155;
+            resize: none;
+            background: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .prompt-text:focus { border-color: var(--primary-color); }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .copy-btn {
+            width: 100%;
+            max-width: 300px;
+            padding: 14px 28px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+        }
+
+        .copy-btn:active { transform: translateY(0); }
+
+        .tip {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* 吐司提示样式 */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px;
+            position: fixed;
+            z-index: 100;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>古月AI · 校园文化墙灵感库</h1>
+    </div>
+    <div class="main">
+        <div class="prompt-wrapper">
+            <textarea class="prompt-text" id="promptContent" readonly>
+你是一名资深且高级的古月AI智能体·校园文化墙灵感库设计专家...（此处保留原提示词内容）...确保每一组话题词最后一句均为“文化墙正面完全展示。”。</textarea>
+        </div>
+        
+        <div class="actions">
+            <button class="copy-btn" onclick="copyPrompt()" aria-label="一键复制提示词">
+                一键复制整套设定词
+            </button>
+            <div class="tip">
+                💡 复制后粘贴至 DeepSeek，输入<strong>学校类型 / 主题 / 内文</strong>即可
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast">复制成功！快去 DeepSeek 体验吧</div>
+
+<script>
+    async function copyPrompt() {
+        const text = document.getElementById("promptContent").value;
+        const toast = document.getElementById("toast");
+
+        try {
+            // 使用现代 API 复制
+            await navigator.clipboard.writeText(text);
+            
+            // 显示成功的 Toast
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+            
+        } catch (err) {
+            // 降级处理：手动选中并复制
+            const textArea = document.getElementById("promptContent");
+            textArea.select();
+            document.execCommand("copy");
+            alert("已通过兼容模式复制");
+        }
+    }
+</script>
+
+</body>
+</html>
