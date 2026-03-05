@@ -1,197 +1,564 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>古月AI智能体 · 校园文化墙灵感库</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古月AI智能体 · 校园文化墙灵感库（教育感 · 亲和力）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-:root{
---primary-color:#3b82f6;
---primary-hover:#1d4ed8;
---bg-color:#f2f8fb;
---text-main:#1e293b;
---text-muted:#64748b;
---card-shadow:0 10px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
-background:var(--bg-color);
-color:var(--text-main);
-line-height:1.6;
-padding:20px;
-display:flex;
-justify-content:center;
-}
-.container{
-width:100%;
-max-width:900px;
-background:#fff;
-border-radius:16px;
-box-shadow:var(--card-shadow);
-overflow:hidden;
-}
-.header{
-background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
-color:#fff;
-padding:30px 20px;
-text-align:center;
-}
-.header h1{
-font-size:clamp(18px,5vw,24px);
-font-weight:600;
-}
-.main{padding:clamp(20px,5vw,40px);}
-.prompt-text{
-width:100%;
-height:60vh;
-min-height:420px;
-padding:20px;
-border:2px solid #e2e8f0;
-border-radius:12px;
-font-size:14px;
-line-height:1.8;
-color:#334155;
-resize:none;
-background:#f8fafc;
-outline:none;
-}
-.prompt-text:focus{border-color:var(--primary-color);}
-.actions{
-margin-top:20px;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:12px;
-}
-.copy-btn{
-width:100%;
-max-width:300px;
-padding:14px 28px;
-background:var(--primary-color);
-color:#fff;
-border:none;
-border-radius:10px;
-font-size:16px;
-font-weight:500;
-cursor:pointer;
-transition:.2s;
-box-shadow:0 4px 6px -1px rgba(59,130,246,.3);
-}
-.copy-btn:hover{
-background:var(--primary-hover);
-transform:translateY(-1px);
-box-shadow:0 10px 15px -3px rgba(59,130,246,.4);
-}
-.tip{
-font-size:13px;
-color:var(--text-muted);
-text-align:center;
-}
-#toast{
-visibility:hidden;
-min-width:200px;
-background:#333;
-color:#fff;
-text-align:center;
-border-radius:8px;
-padding:12px;
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
-font-size:14px;
-opacity:0;
-transition:.3s;
-}
-#toast.show{
-visibility:visible;
-opacity:1;
-}
-</style>
+        body {
+            background: #6d8a7d;
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .agent-card {
+            max-width: 1600px;
+            width: 100%;
+            background: #f9f5ef;
+            border-radius: 60px 60px 40px 40px;
+            box-shadow: 0 40px 70px -20px #3d5a4f, 0 0 0 1px rgba(190, 170, 150, 0.5) inset;
+            overflow: hidden;
+        }
+
+        /* 头部 — 校园文化墙设计智能体 */
+        .agent-header {
+            background: #5c8d89;  /* 清新蓝绿 */
+            padding: 32px 50px 24px 50px;
+            border-bottom: 6px solid #f4d793;  /* 暖黄点缀 */
+        }
+
+        .agent-title {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .agent-title h1 {
+            font-size: 38px;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .agent-tag {
+            background: #f4d793;
+            color: #3a615b;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 10px 30px;
+            border-radius: 60px;
+            letter-spacing: 2px;
+        }
+
+        .agent-sub {
+            font-size: 20px;
+            color: #f0f2e6;
+            font-weight: 300;
+            margin-top: 12px;
+            border-left: 4px solid #f4d793;
+            padding-left: 24px;
+        }
+
+        /* 双栏主体 */
+        .workspace {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* 左侧输入区 — 校园信息 */
+        .input-panel {
+            flex: 1.2;
+            min-width: 450px;
+            background: #ffffff;
+            padding: 48px 42px;
+            border-right: 1px solid #e0d9ce;
+        }
+
+        .input-panel h2 {
+            font-size: 32px;
+            font-weight: 500;
+            color: #3a615b;
+            margin-bottom: 16px;
+            border-bottom: 3px solid #f4d793;
+            padding-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 32px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: #3a615b;
+            margin-bottom: 12px;
+            letter-spacing: 0.8px;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 18px;
+            background: #fafafa;
+            border: 2px solid #ddd2c5;
+            border-radius: 20px;
+            transition: 0.2s;
+            color: #333333;
+            font-weight: 400;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: #c4a484;
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(196, 164, 132, 0.2);
+        }
+
+        .input-group textarea {
+            min-height: 240px;
+            line-height: 1.7;
+        }
+
+        .helper-note {
+            background: #f5f2ea;
+            border-radius: 18px;
+            padding: 22px 26px;
+            margin: 40px 0 28px;
+            font-size: 17px;
+            color: #3a615b;
+            border-left: 10px solid #c4a484;
+        }
+
+        .helper-note p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .generate-btn {
+            background: #5c8d89;
+            border: none;
+            width: 100%;
+            padding: 26px 18px;
+            font-size: 32px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 6px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-bottom: 5px solid #f4d793;
+            margin-top: 30px;
+        }
+
+        .generate-btn:hover {
+            background: #4a7672;
+            transform: translateY(-3px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* 右侧输出区 — 10组校园文化墙话题词 */
+        .output-panel {
+            flex: 2;
+            background: #f5f2ea;
+            padding: 48px 42px;
+            max-height: 950px;
+            overflow-y: auto;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .output-header h2 {
+            font-size: 32px;
+            font-weight: 500;
+            color: #3a615b;
+        }
+
+        .count-badge {
+            background: #f4d793;
+            color: #3a615b;
+            font-size: 22px;
+            font-weight: 700;
+            padding: 8px 30px;
+            border-radius: 40px;
+        }
+
+        .prompt-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .prompt-card {
+            background: #ffffffec;
+            backdrop-filter: blur(2px);
+            border: 1px solid #ddd2c5;
+            border-radius: 28px;
+            padding: 26px 30px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+            transition: 0.2s;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #333333;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+
+        .prompt-card:hover {
+            background: #ffffff;
+            border-color: #c4a484;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .prompt-index {
+            display: inline-block;
+            background: #5c8d89;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 5px 18px;
+            border-radius: 40px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .prompt-text {
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background: #f4d793;
+            color: #3a615b;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #c4a484;
+            margin-top: 5px;
+        }
+
+        .copy-btn:hover {
+            background: #c4a484;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+            color: white;
+            border-color: #388e3c;
+        }
+
+        .footer-note {
+            margin-top: 35px;
+            font-size: 18px;
+            color: #7a9b95;
+            text-align: right;
+            border-top: 2px dashed #f4d793;
+            padding-top: 22px;
+        }
+
+        /* 占位提示 */
+        .placeholder-prompt {
+            color: #9ab3ac;
+            font-style: italic;
+            background: #f0ebe2;
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            font-size: 22px;
+            border: 2px dashed #c4a484;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="agent-card">
+        <!-- 头部：校园文化墙设计智能体 -->
+        <div class="agent-header">
+            <div class="agent-title">
+                <h1>古月AI智能体 · 校园文化墙灵感库</h1>
+                <span class="agent-tag">教育感 · 亲和力 · 活泼有序</span>
+            </div>
+            <div class="agent-sub">专注于小学/中学/大学/教育机构 · 木饰面/亚克力/环保板材 · 温和色彩</div>
+        </div>
 
-<div class="container">
-<div class="header">
-<h1>古月AI智能体 · 校园文化墙灵感库</h1>
-</div>
+        <!-- 左右工作区 -->
+        <div class="workspace">
+            <!-- 左侧输入：校园信息 -->
+            <div class="input-panel">
+                <h2>📚 输入校园信息</h2>
+                
+                <div class="input-group">
+                    <label>学校类型</label>
+                    <input type="text" id="schoolType" placeholder="例：小学 / 中学 / 大学 / 培训机构" value="实验小学">
+                </div>
 
-<div class="main">
-<textarea class="prompt-text" id="promptContent" readonly>
+                <div class="input-group">
+                    <label>文化墙主题</label>
+                    <input type="text" id="theme" placeholder="例：书香校园 · 快乐成长" value="书香校园 · 快乐成长">
+                </div>
 
-你是一名资深且高级的校园文化墙设计智能体，专注于打造展示学校校训校风、办学理念、师生作品、科学知识普及、名人名言、班级公约、活动剪影、荣誉榜及通知公告等板块信息的校园文化墙，长期服务于小学、初中、高中、大学及各类教育培训机构与文创教育空间。
+                <div class="input-group">
+                    <label>📋 文化墙内文 (校训校风、师生作品、科学知识、名人名言、班级公约、活动剪影、荣誉榜、通知公告等)</label>
+                    <textarea id="content" rows="12">校训：明德 尚学 笃行 创新
+校风：阳光 自信 团结 向上
+师生作品：学生水墨画展 · 书法作品 · 科创小发明 · 手工艺术品
+科学知识：植物生长日记 · 太空探索 · 光影奥秘 · 趣味实验
+名人名言：爱因斯坦“想象力比知识更重要” · 孔子“学而不思则罔” · 冰心“读书好，多读书，读好书”
+班级公约：轻声慢步 · 认真倾听 · 按时作业 · 互帮互助
+活动剪影：春季运动会 · 科技节 · 读书月 · 艺术汇演 · 研学旅行
+荣誉榜：区级优秀班集体 · 科技创新大赛一等奖 · 三好学生 · 进步之星
+通知公告：下周家长会 · 社团招募 · 校园开放日 · 安全提示</textarea>
+                </div>
 
-你具备成熟的空间设计能力与高级视觉版式审美，在设计过程中会系统性考虑文化墙整体尺寸比例、墙面规划、视觉节奏、文字字号层级、主标题与副标题比例、行距字距控制、板块排列秩序以及整体留白与视觉呼吸感，确保画面结构稳定、比例协调、信息清晰易读。
+                <div class="helper-note">
+                    <p>✔ 输出10组独立校园文化墙AI话题词，每组以“文化墙正面完全展示。”结尾</p>
+                    <p>✔ 正面垂直视角 · 方正平面墙体 · 真实校园空间(走廊/大厅/教室外) · 环保材质 · 温和色彩</p>
+                    <p>✔ 强调教育感 · 亲和活泼 · 信息清晰 · 每组带复制按钮</p>
+                </div>
 
-设计风格以校园文化风为核心，强调教育感、亲和力、活泼但不杂乱、易读性强，色彩搭配温和协调，融合学校特色元素与学生创意表达，整体风格统一且具有秩序感。
+                <button class="generate-btn" id="generateBtn">生 成 10 组 话 题 词</button>
+            </div>
 
-在所有设计中必须遵循以下原则：
-文化墙需呈现在真实合理的校园空间中，如教学楼走廊、图书馆、前厅或公共学习区；空间尺度与墙面比例协调；构图自然真实；材质符合可落地施工标准，如木饰面、亚克力板、环保板材、艺术涂料、照片板、轻质金属字等。
+            <!-- 右侧输出区：10组校园文化墙提示词 -->
+            <div class="output-panel" id="outputPanel">
+                <div class="output-header">
+                    <h2>即梦AI · 校园文化墙话题词</h2>
+                    <span class="count-badge" id="countDisplay">0 / 10</span>
+                </div>
+                <div class="prompt-list" id="promptList">
+                    <!-- 初始占位 -->
+                    <div class="placeholder-prompt">
+                        输入校园信息并点击生成，将出现10组专业校园文化墙提示词<br>
+                        <span style="font-size: 16px; opacity: 0.7;">(正面完全展示 · 校训/作品/科学/荣誉 · 亲和活泼)</span>
+                    </div>
+                </div>
+                <div class="footer-note">
+                    ⚡ 每组均为完整一句或多句连续描述 · 点击复制按钮即可粘贴到即梦AI
+                </div>
+            </div>
+        </div>
+    </div>
 
-当我提供学校类型、文化墙主题及内文内容后，你需一次性输出10组完整独立、可直接用于即梦AI生成效果图的中文话题词，不进行解释说明，不拆分要点，不使用关键词堆砌方式。
+    <script>
+        (function() {
+            // 获取DOM元素
+            const schoolTypeInput = document.getElementById('schoolType');
+            const themeInput = document.getElementById('theme');
+            const contentInput = document.getElementById('content');
+            const generateBtn = document.getElementById('generateBtn');
+            const promptListDiv = document.getElementById('promptList');
+            const countDisplay = document.getElementById('countDisplay');
 
-每一组必须为完整连续描述，并在结尾强制追加固定句式：
-“文化墙正面完全展示。”
+            // 清空并显示加载状态
+            function setLoading() {
+                promptListDiv.innerHTML = `<div class="placeholder-prompt">⏳ 正在生成10组校园文化墙话题词，请稍候...</div>`;
+                countDisplay.innerText = '0 / 10';
+            }
 
-画面要求：
-墙体必须方正、规则、完整平面；
-不要圆弧墙面；
-不要异形结构；
-不要弧度设计；
-墙体完整出现在画面中。
+            // 复制功能
+            function setupCopyButtons() {
+                document.querySelectorAll('.copy-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        const promptText = this.getAttribute('data-prompt');
+                        navigator.clipboard.writeText(promptText).then(() => {
+                            // 显示复制成功状态
+                            const originalText = this.innerHTML;
+                            this.innerHTML = '✓ 已复制';
+                            this.classList.add('copied');
+                            
+                            setTimeout(() => {
+                                this.innerHTML = originalText;
+                                this.classList.remove('copied');
+                            }, 2000);
+                        }).catch(err => {
+                            alert('复制失败，请手动复制');
+                        });
+                    });
+                });
+            }
 
-视角要求：
-使用正面视图 / 正视角 / front view；
-镜头与墙面垂直；
-不要倾斜、不要透视、不要仰视或俯视；
-构图端正。
+            // 核心生成函数：根据输入产生10组校园文化墙提示词
+            function generatePrompts(schoolType, theme, content) {
+                // 将内文按行拆分，提取关键段落
+                const lines = content.split('\n').filter(line => line.trim() !== '');
+                
+                // 提取各个板块
+                const motto = lines.find(l => l.includes('校训')) || '校训：明德 尚学 笃行 创新';
+                const style = lines.find(l => l.includes('校风')) || '校风：阳光 自信 团结 向上';
+                const works = lines.find(l => l.includes('师生作品')) || '师生作品：学生水墨画展 · 书法作品 · 科创小发明';
+                const science = lines.find(l => l.includes('科学知识')) || '科学知识：植物生长日记 · 太空探索 · 光影奥秘';
+                const quote = lines.find(l => l.includes('名人名言')) || '名人名言：爱因斯坦“想象力比知识更重要” · 孔子“学而不思则罔”';
+                const pact = lines.find(l => l.includes('班级公约')) || '班级公约：轻声慢步 · 认真倾听 · 按时作业';
+                const activity = lines.find(l => l.includes('活动剪影')) || '活动剪影：春季运动会 · 科技节 · 读书月 · 艺术汇演';
+                const honor = lines.find(l => l.includes('荣誉榜')) || '荣誉榜：区级优秀班集体 · 科技创新大赛一等奖 · 三好学生';
+                const notice = lines.find(l => l.includes('通知公告')) || '通知公告：下周家长会 · 社团招募 · 校园开放日';
 
-文字要求：
-全部为清晰可识别中文简体；
-禁止乱码；
-禁止假文字；
-逻辑正确可阅读。
+                // 10种不同的校园友好材质组合
+                const materialSet = [
+                    '浅色木饰面搭配彩色亚克力字，软木板背景，照片板嵌入，柔和灯带洗墙',
+                    '米白色环保烤漆板，实木边框，彩色亚克力照片框，防眩光射灯',
+                    '浅绿色艺术涂料，软木板区域，毛毡公告板，暖色轨道射灯',
+                    '浅橡木纹板材，透明亚克力盒展示学生作品，天花筒灯均匀照明',
+                    '淡蓝色环保涂料，白色立体字，可书写黑板漆区域，嵌入式灯带',
+                    '原木色木饰面，彩色亚克力板块，嵌入式层板展示手工作品，重点射灯',
+                    '浅灰色艺术涂料，彩色软木板结合，照片夹绳展示，嵌入式射灯',
+                    '暖白色烤漆板，磁吸可更换亚克力条，线型灯带勾边，柔和照明',
+                    '浅枫木贴面，磨砂亚克力灯箱，可更换学生作品区域，防眩光筒灯',
+                    '米色布艺硬包与木框结合，透明亚克力插槽，可调节射灯'
+                ];
 
-排版要求：
-标题 > 副标题 > 正文；
-层级清晰；
-留白合理；
-结构清晰；
-避免拥挤。
+                const layoutSet = [
+                    '采用左中右三列布局，左侧校训校风与师生作品，中部科学知识与名人名言，右侧班级公约与活动剪影',
+                    '采用上下分区布局，上方校训校风与主题标题，下方从左至右依次为师生作品、科学知识、名人名言、活动剪影',
+                    '采用网格状模块化布局，六大板块均匀分布：校训校风、师生作品、科学知识、名人名言、活动剪影、荣誉榜',
+                    '采用L型布局，左侧纵向校训校风与师生作品，底部横向活动剪影与荣誉榜，右上科学知识与名人名言',
+                    '采用中心放射式布局，中央校训校风，四周辐射师生作品、科学知识、名人名言、活动剪影、荣誉榜',
+                    '采用双列布局，左侧校训校风与师生作品，右侧科学知识与名人名言，底部活动剪影与荣誉榜',
+                    '采用环绕式布局，中央主题标题，四周环绕校训校风、师生作品、科学知识、名人名言、活动剪影、荣誉榜',
+                    '采用横向三行布局，第一行校训校风与主题，第二行师生作品与科学知识，第三行名人名言、活动剪影、荣誉榜',
+                    '采用不对称平衡布局，左上校训校风与师生作品，右上科学知识与名人名言，左下活动剪影，右下荣誉榜与通知',
+                    '采用阶梯式布局，从左至右依次为校训校风、师生作品、科学知识、名人名言、活动剪影、荣誉榜、通知公告'
+                ];
 
-风格必须真实可施工落地，不得使用概念图表达。
+                const spaceSet = [
+                    '小学校园教学楼走廊',
+                    '中学图书馆入口大厅',
+                    '大学学院楼共享空间',
+                    '培训机构前台区域',
+                    '幼儿园活动区外墙',
+                    '学校文化长廊起点',
+                    '教室外班级文化墙',
+                    '校园科技馆入口',
+                    '艺术楼走廊展墙',
+                    '行政楼一层荣誉墙'
+                ];
 
-</textarea>
+                const prompts = [];
 
-<div class="actions">
-<button class="copy-btn" onclick="copyPrompt()">一键复制整套设定词</button>
-<div class="tip">💡 复制后粘贴至 DeepSeek，输入 学校类型 / 主题 / 内文 即可生成10组效果图提示词</div>
-</div>
+                for (let i = 0; i < 10; i++) {
+                    const space = spaceSet[i % spaceSet.length];
+                    const material = materialSet[i % materialSet.length];
+                    const layout = layoutSet[i % layoutSet.length];
 
-</div>
-</div>
+                    let prompt = '';
+                    
+                    // 三种句式变化
+                    if (i % 3 === 0) {
+                        prompt = `在${schoolType}的${space}中，一面方正垂直的校园文化墙采用${material}，以正面视角完整呈现。墙面${layout}，展示校园文化内容。左上角设置校训“${motto.replace('校训：','')}”与校风“${style.replace('校风：','')}”以彩色立体字突出，主题“${theme}”以较大字体呈现。师生作品板块展示：${works.replace('师生作品：','')}，科学知识板块呈现：${science.replace('科学知识：','')}。名人名言区域展示：${quote.replace('名人名言：','')}，班级公约板块：${pact.replace('班级公约：','')}。活动剪影区域嵌入照片展示：${activity.replace('活动剪影：','')}，荣誉榜呈现：${honor.replace('荣誉榜：','')}，底部设置通知公告栏：${notice.replace('通知公告：','')}。所有文字均为清晰中文简体，标题、副标题、正文层级分明，留白舒适，色彩温和协调，嵌入式灯带与射灯营造柔和光线，材质环保亲和，整体体现教育感与活泼有序的校园氛围。文化墙正面完全展示。`;
+                    } else if (i % 3 === 1) {
+                        prompt = `位于${schoolType}${space}的一面完整垂直文化墙，选用${material}，采用正视角无透视构图。墙面作为校园文化展示区，${layout}，整合校园文化内容。墙面左上角设置校训“${motto.replace('校训：','')}”与校风“${style.replace('校风：','')}”以彩色立体字呈现，主题“${theme}”以活泼字体居中突出。师生作品“${works.replace('师生作品：','')}”以照片与实物结合展示，科学知识“${science.replace('科学知识：','')}”图文并茂。名人名言“${quote.replace('名人名言：','')}”以书法形式呈现，班级公约“${pact.replace('班级公约：','')}”以童趣设计展示。活动剪影区展示${activity.replace('活动剪影：','')}照片，荣誉榜“${honor.replace('荣誉榜：','')}”以奖牌形式呈现，通知公告栏展示${notice.replace('通知公告：','')}。文字信息层级分明，射灯与灯带营造柔和光线，材质环保亲和，整体设计活泼有序、教育感强、可落地实施。文化墙正面完全展示。`;
+                    } else {
+                        prompt = `在${schoolType}的${space}中，一面方正平整的校园文化墙以${material}构成，正面垂直视角构图。墙面${layout}，展示校园文化内容。左上角突出校训“${motto.replace('校训：','')}”与校风“${style.replace('校风：','')}”以彩色立体字，主题“${theme}”置于视觉中心。师生作品“${works.replace('师生作品：','')}”以展示框呈现，科学知识“${science.replace('科学知识：','')}”图文结合，名人名言“${quote.replace('名人名言：','')}”以装饰框展示。班级公约“${pact.replace('班级公约：','')}”以活泼设计呈现，活动剪影区展示${activity.replace('活动剪影：','')}照片，荣誉榜“${honor.replace('荣誉榜：','')}”以奖牌形式，通知公告栏展示${notice.replace('通知公告：','')}。所有中文清晰易读，标题、副标题、正文字号比例自然，留白舒适，色彩温和，材质环保，嵌入式灯带与射灯营造柔和光线。文化墙正面完全展示。`;
+                    }
 
-<div id="toast">复制成功！快去 DeepSeek 使用吧</div>
+                    // 确保结尾
+                    if (!prompt.endsWith('文化墙正面完全展示。')) {
+                        prompt = prompt.trim() + '文化墙正面完全展示。';
+                    }
+                    
+                    prompts.push(prompt);
+                }
+                return prompts;
+            }
 
-<script>
-async function copyPrompt(){
-const text=document.getElementById("promptContent").value;
-const toast=document.getElementById("toast");
-try{
-await navigator.clipboard.writeText(text);
-toast.classList.add("show");
-setTimeout(()=>{toast.classList.remove("show");},2500);
-}catch(err){
-const textArea=document.getElementById("promptContent");
-textArea.select();
-document.execCommand("copy");
-alert("已通过兼容模式复制");
-}
-}
-</script>
+            // 渲染提示词列表（带复制按钮）
+            function renderPrompts(prompts) {
+                if (!prompts || prompts.length === 0) {
+                    promptListDiv.innerHTML = `<div class="placeholder-prompt">无法生成，请检查输入内容</div>`;
+                    countDisplay.innerText = '0 / 10';
+                    return;
+                }
 
+                let html = '';
+                prompts.forEach((prompt, idx) => {
+                    // 转义双引号
+                    const escapedPrompt = prompt.replace(/"/g, '&quot;');
+                    html += `
+                        <div class="prompt-card">
+                            <div class="prompt-index">第 ${idx+1} 组 · 正面校园墙</div>
+                            <div class="prompt-text">${prompt}</div>
+                            <button class="copy-btn" data-prompt="${escapedPrompt}">📋 复制提示词</button>
+                        </div>
+                    `;
+                });
+                promptListDiv.innerHTML = html;
+                countDisplay.innerText = `${prompts.length} / 10`;
+                
+                // 设置复制按钮事件
+                setupCopyButtons();
+            }
+
+            // 生成并显示
+            function handleGenerate() {
+                const schoolType = schoolTypeInput.value.trim() || '实验小学';
+                const theme = themeInput.value.trim() || '书香校园 · 快乐成长';
+                let content = contentInput.value.trim();
+                if (content === '') {
+                    content = `校训：明德 尚学 笃行 创新
+校风：阳光 自信 团结 向上
+师生作品：学生水墨画展 · 书法作品 · 科创小发明 · 手工艺术品
+科学知识：植物生长日记 · 太空探索 · 光影奥秘 · 趣味实验
+名人名言：爱因斯坦“想象力比知识更重要” · 孔子“学而不思则罔” · 冰心“读书好，多读书，读好书”
+班级公约：轻声慢步 · 认真倾听 · 按时作业 · 互帮互助
+活动剪影：春季运动会 · 科技节 · 读书月 · 艺术汇演 · 研学旅行
+荣誉榜：区级优秀班集体 · 科技创新大赛一等奖 · 三好学生 · 进步之星
+通知公告：下周家长会 · 社团招募 · 校园开放日 · 安全提示`;
+                }
+
+                setLoading();
+
+                setTimeout(() => {
+                    try {
+                        const prompts = generatePrompts(schoolType, theme, content);
+                        renderPrompts(prompts);
+                    } catch (e) {
+                        promptListDiv.innerHTML = `<div class="placeholder-prompt">生成出错，请稍后重试</div>`;
+                        countDisplay.innerText = '0 / 10';
+                        console.error(e);
+                    }
+                }, 120);
+            }
+
+            // 绑定点击事件
+            generateBtn.addEventListener('click', handleGenerate);
+
+            // 页面加载后自动生成一组示例
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    handleGenerate();
+                }, 100);
+            });
+        })();
+    </script>
 </body>
 </html>
